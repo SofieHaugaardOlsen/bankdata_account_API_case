@@ -45,14 +45,15 @@ PostgreSQL.
 
 Start the application in development mode:
 
-on windows:
-```powershell
-./mvnw.cmd quarkus:dev
+Linux/macOS/bash:
+```bash
+./mvnw quarkus:dev
 ```
 
-on linux
+Windows PowerShell:
+
 ```powershell
-./mvnw quarkus:dev
+.\mvnw.cmd quarkus:dev
 ```
 
 Quarkus starts the API at `http://localhost:8080`. In development mode,
@@ -93,6 +94,16 @@ Returns the created account as JSON. The initial amount must not be negative.
 
 Example, creating an account with an initial balance of 500 for owner 22:
 
+Linux/macOS/bash:
+
+```bash
+curl -X POST "http://localhost:8080/accounts/22" \
+  -H "Content-Type: application/json" \
+  -d '{"initialAmount":500}'
+```
+
+Windows PowerShell:
+
 ```powershell
 Invoke-RestMethod `
     -Uri "http://localhost:8080/accounts/22" `
@@ -109,6 +120,14 @@ GET /accounts/{ownerID}
 
 Example:
 
+Linux/macOS/bash:
+
+```bash
+curl "http://localhost:8080/accounts/22"
+```
+
+Windows PowerShell:
+
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:8080/accounts/22" -Method Get
 ```
@@ -123,6 +142,16 @@ Content-Type: application/json
 ```
 
 Example, transferring 100 from account 1 to account 3 as owner 22:
+
+Linux/macOS/bash:
+
+```bash
+curl -X POST "http://localhost:8080/accounts/22/transfer/1" \
+  -H "Content-Type: application/json" \
+  -d '{"toID":2,"amount":50}'
+```
+
+Windows PowerShell:
 
 ```powershell
 Invoke-RestMethod `
@@ -143,8 +172,16 @@ GET /accounts/{ownerID}/transactions/{accountID}
 
 Example:
 
+Linux/macOS/bash:
+
+```bash
+curl "http://localhost:8080/accounts/22/transactions/1"
+```
+
+Windows PowerShell:
+
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:8080/accounts/22/transactions/1"  -Method Get
+Invoke-RestMethod -Uri "http://localhost:8080/accounts/22/transactions/1" -Method Get
 ```
 
 ## Error responses
@@ -163,6 +200,14 @@ response body.
 ## Tests
 
 Run the complete test suite directly from a console:
+
+Linux/macOS/bash:
+
+```bash
+./mvnw test
+```
+
+Windows PowerShell:
 
 ```powershell
 .\mvnw.cmd test

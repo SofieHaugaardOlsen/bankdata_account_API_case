@@ -1,0 +1,4 @@
+
+- cleanup 
+- write README
+-docu

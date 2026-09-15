@@ -2,7 +2,7 @@
 
 **Author:** Sofie Haugaard Olsen
 
-REST API for creating  accounts, listing a user's accounts, transferring
+REST API for creating accounts, listing a user's accounts, transferring
 funds, and viewing transaction history.
 
 The implementation includes domain-level error handling, ownership checks,
@@ -164,10 +164,6 @@ Run the complete test suite directly from a console:
 
 Tests can also be run while Quarkus is already running in dev mode by pressing r:
 
-```powershell
-.\mvnw.cmd quarkus:dev
-```
-
 The tests cover account creation, account listing, transfers, ownership
 checks, missing accounts, invalid amounts, and insufficient funds.
 
@@ -178,5 +174,4 @@ checks, missing accounts, invalid amounts, and insufficient funds.
 	profile reloads the sample data on startup, i.e. development data is not retained between restarts. For proper persistence, the application should use an externally managed PostgreSQL database and a migration-based schema strategy instead of `drop-and-create`.
 
 - **Frontend:** Not implemented; the API can be explored through Swagger UI.
-- **Deployment:** Not deployed to a public cloud; the project includes
-	Quarkus Dockerfiles under `src/main/docker` for future deployment.
+- **Deployment:** Not deployed to a public cloud; 

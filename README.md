@@ -46,7 +46,7 @@ PostgreSQL.
 Start the application in development mode:
 
 ```powershell
-.\mvnw.cmd quarkus:dev
+./mvnw.cmd quarkus:dev
 ```
 
 Quarkus starts the API at `http://localhost:8080`. In development mode,

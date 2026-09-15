@@ -2,6 +2,7 @@ package bankdata.accountAPI;
 import bankdata.accountAPI.exceptions.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.LockModeType;
 import jakarta.transaction.Transactional;
 
 import java.util.Collection;
@@ -62,14 +63,14 @@ public class AccountService {
         return accountRepo.findByOwnerID(userID);
     }
 
-
+    //helper to avoid code duplication
+    @Transactional
     protected Account getAccount(long accID){
-        Account target = accountRepo.findById((long) accID);
+        Account target = accountRepo.findById((long) accID, LockModeType.PESSIMISTIC_WRITE);
         if (target == null) {throw new AccountNotFoundException(accID, "Transfer failed: ");}
         return target;
     }
 
-    @Transactional
     /**
      * Transfers funds from one account to another.
      *
@@ -84,6 +85,7 @@ public class AccountService {
      * @throws InvalidAmountException if the amount is not positive
      * @throws NotEnoughFundsException if the source account lacks sufficient funds
      */
+    @Transactional
     public Transaction transfer(long accFrom, long accTo, int amount, long userID){
         log.info(String.format("transfer of %d from account %d to account %d ", amount, accFrom, accTo));
         if (accFrom == accTo) {throw new CannotTransferToSelfException("Transfer failed: ");}
